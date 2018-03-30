@@ -30,7 +30,9 @@
 ;;; Code:
 
 (defconst toan-packages
-  '()
+  '(
+    helm-company
+    (column-marker :location local))
   "The list of Lisp packages required by the toan layer.
 
 Each entry is either:
@@ -58,5 +60,11 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+
+(defun toan/init-helm-company ()
+  (use-package helm-company))
+
+(defun toan/init-column-marker ()
+  (use-package column-marker))
 
 ;;; packages.el ends here

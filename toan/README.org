@@ -9,7 +9,7 @@
 - [[#install][Install]]
 - [[#key-bindings][Key bindings]]
 
-* Description
+* TODO Description
 This layer does wonderful things:
   - thing01
 

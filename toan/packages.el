@@ -31,8 +31,12 @@
 
 (defconst toan-packages
   '(
-    helm-company
-    (column-marker :location local))
+    swiper
+    super-save
+    monky
+    comment-dwim-2
+    (column-marker :location local)
+    (songbird :location local))
   "The list of Lisp packages required by the toan layer.
 
 Each entry is either:
@@ -61,8 +65,17 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 
-(defun toan/init-helm-company ()
-  (use-package helm-company))
+(defun toan/init-swiper ()
+  (use-package swiper))
+
+(defun toan/init-comment-dwim-2 ()
+  (use-package comment-dwim-2))
+
+(defun toan/init-monky ()
+  (use-package monky))
+
+(defun toan/init-super-save ()
+  (use-package super-save))
 
 (defun toan/init-column-marker ()
   (use-package column-marker))

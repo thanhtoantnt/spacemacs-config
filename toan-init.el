@@ -104,7 +104,7 @@
   ;; (require 'langtool)
 
   ;; ocp-indent
-  (add-to-list 'load-path "/home/thanhtoantnt/.opam/4.06.1/share/emacs/site-lisp")
+  (add-to-list 'load-path "/home/thanhtoantnt/.opam/4.07.0/share/emacs/site-lisp")
   (require 'ocp-indent)
 
   ;; songbird-mode

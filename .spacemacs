@@ -6,6 +6,9 @@
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
+
+  (setq undo-tree-auto-save-history nil)
+
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -32,7 +35,15 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(react
+     rust
+     solidity
+     lsp
+     auto-completion
+     typescript
+     go
+     csv
+     graphviz
      yaml
      javascript
      ;; markdown
@@ -40,7 +51,6 @@ values."
      html
      javascript
      ocaml
-     pdf-tools
      spell-checking
      latex
      ;; ----------------------------------------------------------------
@@ -49,7 +59,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
      better-defaults
      emacs-lisp
      git
@@ -67,7 +76,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     rustic
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -89,7 +101,10 @@ You should not put any user code in there besides modifying the variable
 values."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
+
+
   (setq-default dotspacemacs-configuration-layers '(pdf-tools))
+
   (setq-default
    ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -100,6 +115,8 @@ values."
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
+
+
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
@@ -147,7 +164,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 15
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -337,10 +354,99 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (jade-mode less-css-mode yaml-mode monky phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-ag-r super-save comment-dwim-2 swiper ivy diff-hl json-reformat yasnippet indium pdf-tools tablist xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-auctex auctex-latexmk auctex company yapfify web-mode web-beautify unfill tagedit smeargle slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements orgit mwim markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd live-py-mode json-snatcher js2-refactor multiple-cursors js-doc hy-mode helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor emmet-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda auto-yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete mmm-mode json-mode js2-mode coffee-mode utop tuareg caml ocp-indent merlin ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (go-guru go-eldoc company-go go-mode tide typescript-mode csv-mode yaml-mode monky phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-ag-r super-save comment-dwim-2 swiper ivy diff-hl json-reformat yasnippet indium pdf-tools tablist xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-auctex auctex-latexmk auctex company yapfify web-mode web-beautify unfill tagedit smeargle slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements orgit mwim markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd live-py-mode json-snatcher js2-refactor multiple-cursors js-doc hy-mode helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor emmet-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda auto-yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete mmm-mode json-mode js2-mode coffee-mode utop tuareg caml ocp-indent merlin ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(paradox-github-token t)
+ '(pdf-view-midnight-colors (quote ("#DBDBDB" . "#292B2E"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   '(rjsx-mode import-js grizzl add-node-modules-path go-guru go-eldoc company-go go-mode tide typescript-mode csv-mode yaml-mode monky phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-ag-r super-save comment-dwim-2 swiper ivy diff-hl json-reformat yasnippet indium pdf-tools tablist xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help company-auctex auctex-latexmk auctex company yapfify web-mode web-beautify unfill tagedit smeargle slim-mode scss-mode sass-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements orgit mwim markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd live-py-mode json-snatcher js2-refactor multiple-cursors js-doc hy-mode helm-pydoc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor emmet-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda auto-yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete mmm-mode json-mode js2-mode coffee-mode utop tuareg caml ocp-indent merlin ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+ '(paradox-github-token t)
+ '(pdf-view-midnight-colors '("#DBDBDB" . "#292B2E")))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+)
+
+(defun tddsg--find-make-dir-root (dir)
+  "Find the closest parent directory containing Makefile."
+  (cond ((check-sub-string ".." dir) nil)
+        ((file-exists-p (expand-file-name "Makefile" dir))
+         (expand-file-name dir))
+        ((file-exists-p (expand-file-name "build/Makefile" dir))
+         (expand-file-name "build" dir))
+        (t (tddsg--find-make-dir-root (expand-file-name ".." dir))))
+  )
+
+
+(defun tddsg/compile ()
+  "Compile using Makefile in the closest paren directory."
+  (interactive)
+  (projectile-save-project-buffers)
+  (let ((make-dir (tddsg--find-make-dir-root default-directory)))
+    (if (null make-dir)
+        (cond ((derived-mode-p 'rust-mode)
+               (rust-compile))
+              (t (message "Makefile not found!")))
+      (setq compile-command (format "make debug -k -C %s" make-dir))
+      (call-interactively 'compile)))
+  )
+
+(defun tddsg/recompile ()
+  "Recompile using Makefile in the closest paren directory."
+  (interactive)
+  (let ((make-dir (tddsg--find-make-dir-root default-directory)))
+    (projectile-save-project-buffers)
+    (cond ((null make-dir)
+           (message "Makefile not found!"))
+          ((and (check-sub-string "make -k -C" compile-command)
+                (string-suffix-p make-dir compile-command))
+           (call-interactively 'recompile))
+          (t (call-interactively 'tddsg/compile))))
+  )
+
+
+(defun tddsg/hover-thing-at-point ()
+  "Hover thing at point."
+  (interactive)
+  (cond ((derived-mode-p 'tuareg-mode)
+         (merlin-type-enclosing))
+        (t (if (not (fboundp #'lsp-ui-doc-show))
+               (message "Hover thing at point: lsp-mode is not enabled yet.")
+             (lsp-ui-doc-show))))
+  (setq ;; lsp-ui-doc-enable t      ;; change to t to show doc
+   lsp-ui-doc-delay 0.2
+   lsp-ui-doc-position 'at-point
+   lsp-ui-doc-border (face-foreground 'window-divider))
+  )
+
+(require 'cl-lib)
+(defun sanityinc/add-subdirs-to-load-path (parent-dir)
+  "Add every non-hidden subdir of PARENT-DIR to `load-path'."
+  (let ((default-directory parent-dir))
+    (setq load-path
+          (append
+           (cl-remove-if-not
+            #'file-directory-p
+            (directory-files (expand-file-name parent-dir) t "^[^\\.]"))
+           load-path))))
+

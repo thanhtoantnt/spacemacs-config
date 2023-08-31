@@ -68,6 +68,7 @@ This function should only modify configuration layer settings."
    '(
      swiper
      comment-dwim-2
+     company
      )
 
    ;; A list of packages that cannot be updated.
@@ -576,6 +577,7 @@ before packages are loaded."
     (use-package swiper)
     (use-package use-package)
     (use-package comment-dwim-2)
+    (use-package company)
     )
 
   (global-set-key (kbd "C-u") 'swiper)

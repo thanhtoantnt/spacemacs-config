@@ -67,6 +67,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages
    '(
      swiper
+     comment-dwim-2
      )
 
    ;; A list of packages that cannot be updated.
@@ -574,10 +575,11 @@ before packages are loaded."
   (defun toan/config-packages ()
     (use-package swiper)
     (use-package use-package)
+    (use-package comment-dwim-2)
     )
 
   (global-set-key (kbd "C-u") 'swiper)
-  (global-set-key (kbd "M-;") 'comment-dwim)
+  (global-set-key (kbd "M-;") 'comment-dwim-2)
   (global-set-key (kbd "M-|") 'split-window-right)
   ;; NOTE: Cannot override the binding
   (global-set-key (kbd "M-_") 'split-window-below)

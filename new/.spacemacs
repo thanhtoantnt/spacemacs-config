@@ -580,7 +580,7 @@ before packages are loaded."
     (use-package company)
     )
 
-  (global-set-key (kbd "C-u") 'swiper)
+  (global-set-key (kbd "C-r") 'swiper)
   (global-set-key (kbd "M-;") 'comment-dwim-2)
   (global-set-key (kbd "M-|") 'split-window-right)
   ;; NOTE: Cannot override the binding

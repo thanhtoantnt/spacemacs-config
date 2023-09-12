@@ -35,8 +35,7 @@
     super-save
     monky
     comment-dwim-2
-    (column-marker :location local)
-    (songbird :location local))
+    )
   "The list of Lisp packages required by the toan layer.
 
 Each entry is either:

@@ -34,6 +34,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(python
      rust
+     (rustic :variables rustic-lsp-server 'rust-analyzer)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -597,7 +598,15 @@ before packages are loaded."
   (display-line-numbers-mode 1)
   ;; Enable display-line-numbers-mode for the initial buffer after a delay
   ;; (run-with-idle-timer 0 nil (lambda () (display-line-numbers-mode 1)))
+
+  ;;
+  (setq rustic-format-on-save t) ; Enable format on save
+  (setq rustic-format-trigger 'on-save)
+
+
+  ;; local config keys
   (toan/config-keys)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

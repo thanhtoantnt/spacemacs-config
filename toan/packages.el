@@ -64,19 +64,31 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 
-(defun toan/init-swiper ()
-  (use-package swiper))
+(defun toan/init-packages ()
+  (use-package swiper)
+  (use-package comment-dwim-2)
+  (use-package monky)
+  (use-package super-save)
+  (use-package column-marker)
+  )
 
-(defun toan/init-comment-dwim-2 ()
-  (use-package comment-dwim-2))
+(defun toan/init-smartparents ()
+  (smartparens-mode 1)
+  (display-line-numbers-mode 1)
+  )
 
-(defun toan/init-monky ()
-  (use-package monky))
+(defun toan/config-keys ()
+  (global-set-key (kbd "M-o") 'swiper)
+  (global-set-key (kbd "M-;") 'comment-dwim-2)
+  (global-set-key (kbd "M-|") 'split-window-right)
+  ;; NOTE: Cannot override the binding
+  (global-set-key (kbd "M-_") 'split-window-below)
+  (global-set-key (kbd "C-/") 'undo-tree-redo)
+  (global-set-key (kbd "C-o") 'evil-window-next)
+  (global-set-key (kbd "M--") 'evil-window-delete)
+  (global-set-key (kbd "C-x m") 'helm-mini)
+  (global-set-key (kbd "C-x g") 'magit)
+  )
 
-(defun toan/init-super-save ()
-  (use-package super-save))
-
-(defun toan/init-column-marker ()
-  (use-package column-marker))
 
 ;;; packages.el ends here

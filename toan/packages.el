@@ -77,6 +77,33 @@ Each entry is either:
   (display-line-numbers-mode 1)
   )
 
+(defun check-sub-string (sub-string super-string)
+  (and super-string
+       sub-string
+       (string-match-p (regexp-quote sub-string) super-string)))
+
+(defun toan/compile ()
+  "Find the closest Makefile and compile."
+  (interactive)
+  ;; (when (get-buffer "*compilation*") (kill-buffer "*compilation*"))
+  (defun find-make-dir (dir)
+    (cond ((check-sub-string ".." dir) "./")
+          ((file-exists-p (expand-file-name "Makefile" dir)) dir)
+          ((file-exists-p (expand-file-name "build/Makefile" dir))
+           (expand-file-name "build" dir))
+          (t (find-make-dir (expand-file-name ".." dir)))) )
+  ;; save editing buffers
+  (let ((root (projectile-project-root)))
+    (save-some-buffers (and root (not compilation-ask-about-save))
+                       (lambda ()
+                         (projectile-project-buffer-p (current-buffer) root))))
+  (when (check-sub-string "make" compile-command)
+    (let ((make-dir (expand-file-name (find-make-dir default-directory))))
+      (setq compile-command (format "make -k -C %s" make-dir))))
+  (call-interactively 'compile)
+
+  )
+
 (defun toan/config-keys ()
   (global-set-key (kbd "M-o") 'swiper)
   (global-set-key (kbd "M-;") 'comment-dwim-2)
@@ -88,7 +115,10 @@ Each entry is either:
   (global-set-key (kbd "M--") 'evil-window-delete)
   (global-set-key (kbd "C-x m") 'helm-mini)
   (global-set-key (kbd "C-x g") 'magit)
-  )
+  (global-set-key (kbd "C-c C-v") 'toan/compile)
+)
+
+
 
 
 ;;; packages.el ends here

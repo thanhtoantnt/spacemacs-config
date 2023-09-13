@@ -576,34 +576,16 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
-  (defun global/config-packages ()
-    (use-package swiper)
-    (use-package helm)
-    (use-package use-package)
-    (use-package comment-dwim-2)
-    (use-package company)
-    )
+  ;; (load-file "~/.emacs.d/private/toan-init.el")
+  ;; (toan/config-packages)
 
-  (defun global/global-modes ()
-    (smartparens-mode 1)
-    )
+  (add-hook 'after-change-major-mode-hook #'display-line-numbers-mode)
+  (add-hook 'after-change-major-mode-hook #'smartparens-mode)
+  (display-line-numbers-mode 1)
 
-  (load-file "~/.emacs.d/private/toan-init.el")
-  (toan/config-packages)
-
-  (global-set-key (kbd "M-o") 'swiper)
-  (global-set-key (kbd "M-;") 'comment-dwim-2)
-  (global-set-key (kbd "M-|") 'split-window-right)
-  ;; NOTE: Cannot override the binding
-  (global-set-key (kbd "M-_") 'split-window-below)
-  (global-set-key (kbd "C-/") 'undo-tree-redo)
-  (global-set-key (kbd "C-o") 'evil-window-next)
-  (global-set-key (kbd "M--") 'evil-window-delete)
-  (global-set-key (kbd "C-x m") 'helm-mini)
-  (global-set-key (kbd "C-x g") 'magit)
-)
+  (toan/config-keys)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -617,10 +599,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(ignored-local-variable-values '((TeX-master . "main")))
  '(package-selected-packages
-   '(rainbow-mode blacken code-cells company-anaconda anaconda-mode counsel-gtags counsel cython-mode dap-mode lsp-docker bui ggtags helm-cscope helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms nose pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc stickyfunc-enhance xcscope yapfify sqlite3 lsp-mode swiper ace-jump-helm-line ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol centered-cursor-mode clean-aindent-mode column-enforce-mode define-word devdocs dired-quick-sort drag-stuff dumb-jump editorconfig elisp-def elisp-slime-nav emr clang-format list-utils eval-sexp-fu evil-anzu anzu evil-args evil-cleverparens paredit evil-collection annalist evil-escape evil-exchange evil-goggles evil-iedit-state iedit evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse fancy-battery flx-ido flx flycheck-elsa flycheck-package package-lint flycheck golden-ratio google-translate helm-ag helm-descbinds helm-make helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop helm-themes helm-xref helm wfnames helm-core hide-comnt highlight-indentation highlight-numbers parent-mode highlight-parentheses hl-todo compat hungry-delete indent-guide info+ inspector link-hint lorem-ipsum macrostep multi-line shut-up nameless open-junk-file org-superstar overseer f pkg-info epl paradox spinner password-generator popup popwin quickrun rainbow-delimiters request restart-emacs smartparens space-doc spaceline powerline spacemacs-purpose-popwin spacemacs-whitespace-cleanup string-edit-at-point string-inflection symbol-overlay symon term-cursor toc-org treemacs-icons-dired treemacs-persp persp-mode treemacs-projectile treemacs projectile cfrs ht pfuture ace-window avy posframe s undo-tree queue uuidgen vi-tilde-fringe vim-powerline volatile-highlights window-purpose imenu-list winum dash writeroom-mode visual-fill-column ws-butler async bind-map diminish dotenv-mode evil-evilified-state holy-mode hybrid-mode evil goto-chg hydra lv pcre2el use-package bind-key which-key)))
+   '(swiper cmake-mode ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -577,13 +577,26 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; (defun global/config-packages ()
+  ;;   (use-package swiper)
+  ;;   (use-package helm)
+  ;;   (use-package use-package)
+  ;;   (use-package comment-dwim-2)
+  ;;   (use-package company)
+  ;;   )
+
+  ;; (defun global/global-modes ()
+  ;;   (smartparens-mode 1)
+  ;;   )
+
   ;; (load-file "~/.emacs.d/private/toan-init.el")
   ;; (toan/config-packages)
 
   (add-hook 'after-change-major-mode-hook #'display-line-numbers-mode)
   (add-hook 'after-change-major-mode-hook #'smartparens-mode)
   (display-line-numbers-mode 1)
-
+  ;; Enable display-line-numbers-mode for the initial buffer after a delay
+  ;; (run-with-idle-timer 0 nil (lambda () (display-line-numbers-mode 1)))
   (toan/config-keys)
   )
 

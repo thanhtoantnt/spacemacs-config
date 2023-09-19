@@ -85,12 +85,9 @@ Each entry is either:
 (defun toan/compile ()
   "Find the closest Makefile and compile."
   (interactive)
-  ;; (when (get-buffer "*compilation*") (kill-buffer "*compilation*"))
   (defun find-make-dir (dir)
     (cond ((check-sub-string ".." dir) "./")
           ((file-exists-p (expand-file-name "Makefile" dir)) dir)
-          ((file-exists-p (expand-file-name "build/Makefile" dir))
-           (expand-file-name "build" dir))
           (t (find-make-dir (expand-file-name ".." dir)))) )
   ;; save editing buffers
   (let ((root (projectile-project-root)))
@@ -106,6 +103,7 @@ Each entry is either:
 
 (defun toan/config-keys ()
   (global-set-key (kbd "M-o") 'swiper)
+  (global-set-key (kbd "M-i") 'lsp-execute-code-action)
   (global-set-key (kbd "M-;") 'comment-dwim-2)
   (global-set-key (kbd "M-|") 'split-window-right)
   ;; NOTE: Cannot override the binding
@@ -115,6 +113,7 @@ Each entry is either:
   (global-set-key (kbd "M--") 'evil-window-delete)
   (global-set-key (kbd "C-x m") 'helm-mini)
   (global-set-key (kbd "C-x g") 'magit)
+  (global-set-key (kbd "C-c C-n") 'flycheck-next-error)
   (global-set-key (kbd "C-c C-v") 'toan/compile)
 )
 

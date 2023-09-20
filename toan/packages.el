@@ -102,11 +102,14 @@ Each entry is either:
   )
 
 (defun toan/config-keys ()
+  ;; undo tree
+  (define-key undo-tree-map (kbd "M-_") nil)
+
+  ;; Key maps
   (global-set-key (kbd "M-o") 'swiper)
   (global-set-key (kbd "M-i") 'lsp-execute-code-action)
   (global-set-key (kbd "M-;") 'comment-dwim-2)
   (global-set-key (kbd "M-|") 'split-window-right)
-  ;; NOTE: Cannot override the binding
   (global-set-key (kbd "M-_") 'split-window-below)
   (global-set-key (kbd "C-/") 'undo-tree-redo)
   (global-set-key (kbd "C-o") 'evil-window-next)
@@ -118,10 +121,7 @@ Each entry is either:
 )
 
 (defun toan/config-packages ()
-  ;; undo tree
-  (global-undo-tree-mode 0)
-
-  )
+)
 
 
 ;;; packages.el ends here

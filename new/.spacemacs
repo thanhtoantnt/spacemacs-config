@@ -605,7 +605,8 @@ before packages are loaded."
 
   ;; local config keys
   (toan/config-keys)
-  (toan/config-packages)
+  (toan/config-packages
+   )
 
   )
 

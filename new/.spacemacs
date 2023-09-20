@@ -577,7 +577,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
   ;; (defun global/config-packages ()
   ;;   (use-package swiper)
   ;;   (use-package helm)
@@ -606,6 +605,7 @@ before packages are loaded."
 
   ;; local config keys
   (toan/config-keys)
+  (toan/config-packages)
 
   )
 

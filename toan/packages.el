@@ -117,7 +117,11 @@ Each entry is either:
   (global-set-key (kbd "C-c C-v") 'toan/compile)
 )
 
+(defun toan/config-packages ()
+  ;; undo tree
+  (global-undo-tree-mode 0)
 
+  )
 
 
 ;;; packages.el ends here
